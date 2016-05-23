@@ -26,8 +26,19 @@ c1 = Character.new('Jake')
 c2 = Character.new('Finn')
 c3 = Character.new('Marceline')
 c4 = Character.new('Princess Bubblegum')
+c5 = Character.new('The Ice King')
 
 characters = [c1, c2, c3, c4]
+
+def character_menu(characters)
+  menu = "" 
+  number = 1
+  characters.each do |character|
+  	menu << "#{number}. " << character.name << "\n"
+  	number = number + 1
+  end
+  menu
+end
 
 number_of_players.times do |i|
   puts "What is the name for player number #{i + 1}?"
@@ -37,11 +48,23 @@ number_of_players.times do |i|
   players << player 
   
   puts "Which character do you want, #{player.name}? (choose a number)"
-  puts "1-Jake, 2-Finn, 3-Marceline, 4-Princess Bubblegum"
+  puts character_menu(characters)
   print "< "
   player_number = $stdin.gets.chomp.to_i
+
+  while player_number > characters.length || player_number <= 0
+	puts "Try again"
+    puts character_menu(characters)
+    print "< "
+    player_number = $stdin.gets.chomp.to_i
+  end
+
+  index = player_number - 1
+  character = characters.delete_at(index) 
+
+
+  player.character = character
   
-  player.character = characters[player_number - 1]
 end
 
 
