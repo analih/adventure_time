@@ -1,5 +1,6 @@
 require './lib/character'
 require './lib/player'
+require './lib/location'
 
 puts "How many players want to play?"
 print "< "
@@ -54,14 +55,47 @@ number_of_players.times do |i|
   index = player_number - 1
   character = characters.delete_at(index) 
 
-
   player.character = character
-  
 end
 
+l1 = Location.new("Tree Fort")
+l2 = Location.new("Dead World")
+l3 = Location.new("Candy Kingdom")
+l4 = Location.new("Nightosphere")
+
+locations = [l1, l2, l3, l4]
+
+def location_menu(locations)
+	menu = ""
+	number = 1
+	locations.each do |location|
+		menu << "#{number}. " << location.name << "\n"
+		number = number + 1
+	end 
+	menu
+end
+
+players.each do |player|
+  puts "Which location should #{player.character.name} start at? (choose a number)"
+  puts location_menu(locations)
+  print "< "
+  character_location = $stdin.gets.chomp.to_i
+    
+  while character_location > locations.length || character_location <= 0
+    puts "Try again"
+    puts location_menu(locations)
+    print "< "
+	  character_location = $stdin.gets.chomp.to_i
+  end
+
+  index = character_location - 1
+  location = locations[index]
+  character = player.character
+  character.location = location
+end
 
 players.each do |player|
   puts player.name
   puts player.character.name
+  puts player.character.location.name
 end
-
