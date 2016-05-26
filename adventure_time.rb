@@ -1,6 +1,8 @@
 require './lib/character'
 require './lib/player'
 require './lib/location'
+require './lib/henchman'
+require './lib/boss'
 
 puts "How many players want to play?"
 print "< "
@@ -64,6 +66,15 @@ l3 = Location.new("Candy Kingdom")
 l4 = Location.new("Nightosphere")
 
 locations = [l1, l2, l3, l4]
+enemies = []
+enemies << Boss.new('Gunter')
+(locations.length - 1).times do 
+  enemies << Henchman.new('Penguin')
+end
+shuffled_enemies = enemies.shuffle
+locations.each do |location|
+  location.encounters << shuffled_enemies.pop
+end
 
 def location_menu(locations)
 	menu = ""
@@ -98,4 +109,9 @@ players.each do |player|
   puts player.name
   puts player.character.name
   puts player.character.location.name
+
+end
+
+locations.each do |location|
+  puts "#{location.name} : #{location.encounters.map(&:name)}"
 end
