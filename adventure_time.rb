@@ -60,10 +60,10 @@ number_of_players.times do |i|
   player.character = character
 end
 
-l1 = Location.new("Tree Fort")
-l2 = Location.new("Dead World")
-l3 = Location.new("Candy Kingdom")
-l4 = Location.new("Nightosphere")
+l1 = Location.new("Tree Fort", 2, 3, 3, 2, 4, 3, 2, 3)
+l2 = Location.new("Dead World", 1, 3, 4, 2, 3, 2, 3, 2)
+l3 = Location.new("Candy Kingdom", 2, 4, 2, 3, 4, 4, 3, 4)
+l4 = Location.new("Nightosphere", 3, 2, 4, 4, 3, 3, 2, 3)
 
 locations = [l1, l2, l3, l4]
 enemies = []
