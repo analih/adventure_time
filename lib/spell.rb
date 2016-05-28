@@ -1,7 +1,7 @@
 class Spell
   attr_reader :name
 
-  def sel.all 
+  def self.all 
     [
       Spell.new("Dustomancy"),
       Spell.new("Shadowcery"),

@@ -74,6 +74,8 @@ end
 shuffled_enemies = enemies.shuffle
 locations.each do |location|
   location.encounters << shuffled_enemies.pop
+  location.build_location
+  location.encounters.shuffle!
 end
 
 def location_menu(locations)

@@ -2,6 +2,7 @@ require "minitest/autorun"
 require "./lib/location"
 require "./lib/monster"
 require "./lib/barrier"
+require "./lib/weapon"
 
 describe Location do
 
@@ -22,7 +23,7 @@ describe Location do
         location.build_location
         location.encounters.length.must_equal 1
 
-        assert_instance_of(Monster, location.encounters.first)
+        assert_instance_of( Monster, location.encounters.first)
       end
     end
     
@@ -37,10 +38,32 @@ describe Location do
     end
 
     describe 'when adding a barrier' do
-      it 'will add a barrier encounter to the location' do
+      it 'will add a barrier encounter to the location equal to the count' do
         location = Location.new("Test Location", 0, 1, 0, 0, 0, 0, 0, 0)
         location.build_location
+        location.encounters.length.must_equal 1
+
         assert_instance_of(Barrier, location.encounters.first)
+      end
+    end
+    
+    describe 'when adding barriers' do
+      it 'will add barrier encounters to the location equal to the count' do
+        location = Location.new("Test Location", 0, 2, 0, 0, 0, 0, 0, 0)
+        location.build_location
+        location.encounters.length.must_equal 2
+
+        assert_instance_of(Barrier, location.encounters.first)
+      end
+    end
+    
+    describe 'when adding weapon' do
+      it 'will add weapon encounters to the location equal to the count' do
+        location = Location.new("Test Location", 0, 0, 1, 0, 0, 0, 0, 0)
+        location.build_location
+        location.encounters.length.must_equal 1
+
+        assert_instance_of(Weapon, location.encounters.first)
       end
     end
   end
