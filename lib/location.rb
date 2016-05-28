@@ -1,3 +1,5 @@
+require "./lib/monster"
+
 class Location 
 	attr_reader :name, :encounters, :monster_count, :barrier_count, :weapon_count, :spell_count, :armor_count, :item_count, :ally_count, :blessing_count 
 
@@ -14,11 +16,15 @@ class Location
     @item_count = item_count
     @ally_count = ally_count
     @blessing_count = blessing_count
-
-    build_location
   end
 
+  def valid?
+    encounter_count = monster_count + barrier_count + weapon_count + spell_count + armor_count + item_count + ally_count + blessing_count
+    encounter_count == 9 
+  end 
+
   def build_location
+    encounters << Monster.all.sample
   end
 
 end
