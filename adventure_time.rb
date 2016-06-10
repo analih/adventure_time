@@ -3,6 +3,8 @@ require './lib/player'
 require './lib/location'
 require './lib/henchman'
 require './lib/boss'
+require './lib/character'
+require './lib/location'
 
 puts "How many players want to play?"
 print "< "
@@ -16,14 +18,7 @@ end
 
 players = []
 
-c1 = Character.new('Jake')
-c2 = Character.new('Finn')
-c3 = Character.new('Marceline')
-c4 = Character.new('Princess Bubblegum')
-c5 = Character.new('The Ice King')
-c6 = Character.new('BMO')
-
-characters = [c1, c2, c3, c4, c5, c6]
+characters = Character.all
 
 def character_menu(characters)
   menu = "" 
@@ -56,16 +51,10 @@ number_of_players.times do |i|
 
   index = player_number - 1
   character = characters.delete_at(index) 
-
   player.character = character
 end
 
-l1 = Location.new("Tree Fort", 2, 3, 3, 2, 4, 3, 2, 3)
-l2 = Location.new("Dead World", 1, 3, 4, 2, 3, 2, 3, 2)
-l3 = Location.new("Candy Kingdom", 2, 4, 2, 3, 4, 4, 3, 4)
-l4 = Location.new("Nightosphere", 3, 2, 4, 4, 3, 3, 2, 3)
-
-locations = [l1, l2, l3, l4]
+locations = Location.all
 enemies = []
 enemies << Boss.new('Gunter')
 (locations.length - 1).times do 

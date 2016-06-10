@@ -15,6 +15,14 @@ describe Location do
       @location.name.must_equal "Test Location"
     end
   end
+  
+  describe ".create!" do
+    it 'will return a location' do
+      location = Location.create!("Test Location", 1, 1, 1, 1, 1, 1, 1, 2)
+    
+      assert_instance_of(Location, location)
+    end
+  end
 
   describe "build_location" do
     describe 'when adding a monster' do

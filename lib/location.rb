@@ -25,9 +25,31 @@ class Location
     @blessing_count = blessing_count
   end
 
+  def self.create!(name, monster_count, barrier_count, weapon_count, spell_count, armor_count, item_count, ally_count, blessing_count)
+    new(name, monster_count, barrier_count, weapon_count, spell_count, armor_count, item_count, ally_count, blessing_count).tap do |new_location|
+      if !new_location.valid?
+        raise "Encounter count #{encounter_count} is not equal to #{EXPECTED_ENCOUNTER_COUNT}!"
+      end
+    end
+  end
+
+  def self.all 
+    [
+      Location.create!('Tree Fort', 1, 1, 2, 0, 2, 1, 2, 0),
+      Location.create!('Dead World', 3, 0, 2, 2, 0, 2, 0, 0),
+      Location.create!('Candy Kingdom', 0, 1, 0, 0, 2, 2, 2, 2),
+      Location.create!('Nightosphere', 2, 1, 0, 2, 0, 2, 0, 2)
+    ]
+  end
+  
+  EXPECTED_ENCOUNTER_COUNT = 9
+
+  def encounter_count
+    monster_count + barrier_count + weapon_count + spell_count + armor_count + item_count + ally_count + blessing_count
+  end  
+  
   def valid?
-    encounter_count = monster_count + barrier_count + weapon_count + spell_count + armor_count + item_count + ally_count + blessing_count
-    encounter_count == 9
+    encounter_count == EXPECTED_ENCOUNTER_COUNT
   end 
 
   def build_location
