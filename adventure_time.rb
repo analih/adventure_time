@@ -6,6 +6,8 @@ require './lib/boss'
 require './lib/character'
 require './lib/location'
 
+require 'pry'
+
 puts "How many players want to play?"
 print "< "
 
@@ -60,6 +62,7 @@ enemies << Boss.new('Gunter')
 (locations.length - 1).times do 
   enemies << Henchman.new('Penguin')
 end
+
 shuffled_enemies = enemies.shuffle
 locations.each do |location|
   location.encounters << shuffled_enemies.pop
@@ -96,13 +99,18 @@ players.each do |player|
   character.location = location
 end
 
-players.each do |player|
-  puts player.name
-  puts player.character.name
-  puts player.character.location.name
+def encounters_available?(locations)
+  locations.any? do |location|
+    location.encounters.count > 0
+  end
+end 
 
+while encounters_available?(locations) 
+  players.each do |player|
+    player.take_turn
+  end
 end
 
-locations.each do |location|
-  puts "#{location.name} : #{location.encounters.map(&:name)}"
-end
+
+
+puts "GAME OVER!!!"

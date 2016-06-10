@@ -5,4 +5,9 @@ class Player
   def initialize(name)
     @name = name
   end
+
+  def take_turn
+    puts character.have_encounter! 
+  end
 end
+

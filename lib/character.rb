@@ -18,4 +18,15 @@ class Character
   	@name = name
   end
 
+  def have_encounter!
+    
+    if location.encounters.length == 0 
+      "No more encounters avaliable"
+    else
+      encounter = location.encounters.pop 
+      encounter.name
+    end
+    
+  end
+
 end
